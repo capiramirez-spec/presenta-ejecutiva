@@ -2,7 +2,6 @@ import streamlit as st
 import streamlit.components.v1 as components
 
 # 1. Configuración de la página en Streamlit
-# Esto define cómo se ve la pestaña en el navegador
 st.set_page_config(
     page_title="Presentación Ejecutiva", 
     page_icon="🏢",
@@ -10,13 +9,11 @@ st.set_page_config(
 )
 
 # 2. Ocultar la interfaz predeterminada de Streamlit
-# Esto elimina el menú superior y la marca de agua inferior para que parezca una app web pura
 hide_streamlit_style = """
             <style>
             #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             header {visibility: hidden;}
-            /* Quitamos el padding por defecto para usar todo el espacio */
             .block-container {
                 padding-top: 0rem;
                 padding-bottom: 0rem;
@@ -25,7 +22,7 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-# 3. Código HTML, CSS y JS de la presentación móvil (Totalmente Anónimo)
+# 3. Código HTML, CSS y JS de la presentación móvil (8 páginas - Anónimo)
 html_mobile = """
 <!DOCTYPE html>
 <html lang="es">
@@ -43,11 +40,10 @@ html_mobile = """
     body, html {
         margin: 0; padding: 0; height: 100%; width: 100%;
         font-family: 'Inter', sans-serif; 
-        background-color: transparent; /* Fondo transparente para integrar con Streamlit */
+        background-color: transparent; 
         display: flex; justify-content: center; align-items: center;
     }
 
-    /* Contenedor formato 9:16 móvil */
     #mobile-deck {
         width: 400px; height: 710px; 
         background-color: var(--bg-color);
@@ -67,34 +63,32 @@ html_mobile = """
     .slide.active { opacity: 1; pointer-events: auto; }
 
     h1 { font-family: 'Playfair Display', serif; color: var(--primary); font-size: 34px; line-height: 1.2; margin: 0 0 20px 0; }
-    h2 { font-size: 22px; color: var(--accent); margin: 0 0 10px 0; }
-    p { font-size: 18px; color: #444; line-height: 1.5; margin-bottom: 20px; }
+    h2 { font-size: 20px; color: var(--accent); margin: 0 0 10px 0; letter-spacing: 1px; text-transform: uppercase;}
+    p { font-size: 17px; color: #444; line-height: 1.5; margin-bottom: 20px; }
 
     .service-card {
-        background: white; padding: 15px; border-radius: 8px;
+        background: white; padding: 18px; border-radius: 8px;
         border-left: 4px solid var(--primary); margin-bottom: 15px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     }
-    .service-card h3 { margin: 0 0 5px 0; font-size: 18px; color: var(--primary); }
-    .service-card p { margin: 0; font-size: 14px; }
+    .service-card h3 { margin: 0 0 8px 0; font-size: 19px; color: var(--primary); }
+    .service-card p { margin: 0; font-size: 15px; color: #555;}
 
-    .stat { text-align: center; margin-bottom: 25px; }
-    .stat-num { font-family: 'Playfair Display'; font-size: 48px; font-weight: bold; color: var(--accent); }
-    .stat-text { font-size: 16px; font-weight: 600; color: var(--primary); }
+    .stat { text-align: center; margin-bottom: 25px; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.03);}
+    .stat-num { font-family: 'Playfair Display'; font-size: 44px; font-weight: bold; color: var(--accent); line-height: 1; }
+    .stat-text { font-size: 15px; font-weight: 600; color: var(--primary); margin-top: 5px; }
 
     /* Controles táctiles */
-    .touch-area {
-        position: absolute; top: 0; height: 100%; width: 50%; z-index: 10; cursor: pointer;
-    }
+    .touch-area { position: absolute; top: 0; height: 100%; width: 50%; z-index: 10; cursor: pointer; }
     .touch-left { left: 0; }
     .touch-right { right: 0; }
     
     .progress {
         position: absolute; bottom: 20px; left: 0; width: 100%;
-        display: flex; justify-content: center; gap: 8px; z-index: 20;
+        display: flex; justify-content: center; gap: 6px; z-index: 20;
     }
-    .dot { width: 8px; height: 8px; background: #CCC; border-radius: 50%; }
-    .dot.active { background: var(--primary); }
+    .dot { width: 7px; height: 7px; background: #CCC; border-radius: 50%; transition: background 0.3s;}
+    .dot.active { background: var(--primary); width: 20px; border-radius: 4px;}
 </style>
 </head>
 <body>
@@ -105,84 +99,110 @@ html_mobile = """
     <div class="touch-area touch-right" onclick="move(1)"></div>
 
     <div class="slide active" id="m-slide-1">
-        <h2 style="font-size: 20px; color: var(--primary); font-family: 'Playfair Display', serif;">CONSULTING<span style="color: var(--accent);">GROUP</span></h2>
+        <div style="font-size: 16px; color: var(--primary); font-family: 'Playfair Display', serif; font-weight: bold; margin-bottom: 30px;">
+            CONSULTING<span style="color: var(--accent);">GROUP</span>
+        </div>
         <h1 style="font-size: 42px;">Más allá del<br>cumplimiento.</h1>
-        <p>Inteligencia legal y predictiva para blindar el patrimonio de su empresa.</p>
-        <div style="margin-top: auto; font-size: 12px; color: #888; text-align: center;">Toca el lado derecho para avanzar 👉</div>
+        <p style="font-size: 19px;">Inteligencia legal y predictiva para blindar el patrimonio de su empresa.</p>
+        <div style="margin-top: auto; font-size: 13px; color: #888; text-align: center; font-weight: 600;">Toca la derecha para avanzar 👉</div>
     </div>
 
     <div class="slide" id="m-slide-2">
         <h2>El Riesgo Actual</h2>
         <h1>Anticipar o Pagar.</h1>
-        <p>La complejidad fiscal y regulatoria no perdona improvisaciones.</p>
+        <p>La complejidad fiscal y regulatoria no perdona improvisaciones en empresas en crecimiento.</p>
         <div class="service-card" style="border-left-color: var(--accent);">
-            <h3>El problema</h3>
-            <p>Reaccionar a multas y requerimientos frena el crecimiento corporativo.</p>
+            <h3 style="color: var(--accent);">El costo de reaccionar</h3>
+            <p>Apagar incendios con multas o bloqueos operativos destruye márgenes y frena la escalabilidad.</p>
         </div>
     </div>
 
     <div class="slide" id="m-slide-3">
-        <h2>La Solución</h2>
-        <h1>Estrategia Data-Driven</h1>
-        <p>Análisis avanzado para modelar escenarios regulatorios.</p>
-        <ul style="padding-left: 20px; font-size: 18px; color: #444; line-height: 1.6;">
-            <li>Cero sorpresas fiscales.</li>
-            <li>Continuidad operativa garantizada.</li>
-            <li>Protección patrimonial proactiva.</li>
-        </ul>
+        <h2>El Paradigma</h2>
+        <h1>Certeza en lugar de miedo.</h1>
+        <p>Hacer las cosas "bien" es el estándar. Nuestro valor es transformar la incertidumbre normativa en una ventaja competitiva.</p>
+        <div class="service-card">
+            <h3>Nuestro Enfoque</h3>
+            <p>No esperamos el requerimiento de la autoridad; estructuramos su empresa para que ese requerimiento jamás proceda.</p>
+        </div>
     </div>
 
     <div class="slide" id="m-slide-4">
-        <h2>Estructura</h2>
-        <h1>Ecosistema Integral</h1>
-        <div class="service-card">
-            <h3>Estrategia Fiscal</h3>
-            <p>Optimización inteligente de carga tributaria.</p>
-        </div>
-        <div class="service-card">
-            <h3>Gestión Regulatoria</h3>
-            <p>Aseguramos cumplimiento sin pausas operativas.</p>
-        </div>
-        <div class="service-card">
-            <h3>Blindaje Patrimonial</h3>
-            <p>Protegemos el legado y capital de los socios.</p>
-        </div>
+        <h2>Metodología</h2>
+        <h1>Decisiones Data-Driven</h1>
+        <p>Implementamos tecnología analítica y modelos predictivos poco comunes en el sector legal tradicional.</p>
+        <ul style="padding-left: 20px; font-size: 16px; color: #444; line-height: 1.7;">
+            <li><strong>Auditoría Algorítmica:</strong> Detectamos fisuras antes que la autoridad.</li>
+            <li><strong>Proyección de Escenarios:</strong> Simulamos impactos fiscales.</li>
+            <li><strong>Ejecución Quirúrgica:</strong> Implementamos la defensa.</li>
+        </ul>
     </div>
 
     <div class="slide" id="m-slide-5">
-        <h2>Impacto</h2>
-        <h1>Resultados Medibles</h1>
-        <div class="stat">
-            <div class="stat-num">98%</div>
-            <div class="stat-text">Mitigación de Riesgo Fiscal</div>
+        <h2>Ecosistema I</h2>
+        <h1>Blindaje Operativo</h1>
+        <p>Aseguramos que el día a día de su empresa fluya sin interrupciones ni fricciones institucionales.</p>
+        <div class="service-card">
+            <h3>Estrategia Fiscal</h3>
+            <p>Optimización inteligente de la carga tributaria basada en datos y total cumplimiento legal.</p>
         </div>
-        <div class="stat">
-            <div class="stat-num">100%</div>
-            <div class="stat-text">Continuidad Operativa</div>
+        <div class="service-card">
+            <h3>Gestión Regulatoria</h3>
+            <p>Estructuramos contratos para garantizar la continuidad al 100% sin pausas.</p>
         </div>
     </div>
 
-    <div class="slide" id="m-slide-6" style="background: var(--primary); color: white;">
+    <div class="slide" id="m-slide-6">
+        <h2>Ecosistema II</h2>
+        <h1>Blindaje Estructural</h1>
+        <p>Preparamos los cimientos de su corporativo para el futuro, la sucesión o la captación de capital.</p>
+        <div class="service-card">
+            <h3>Protección Patrimonial</h3>
+            <p>Vehículos legales que aíslan y resguardan el capital personal de los socios.</p>
+        </div>
+        <div class="service-card">
+            <h3>Arquitectura Financiera</h3>
+            <p>Estructuras transparentes diseñadas para superar rigurosos procesos de Due Diligence.</p>
+        </div>
+    </div>
+
+    <div class="slide" id="m-slide-7">
+        <h2>Impacto</h2>
+        <h1>Resultados Medibles</h1>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div class="stat">
+                <div class="stat-num">98%</div>
+                <div class="stat-text">Mitigación de Riesgo Fiscal</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">100%</div>
+                <div class="stat-text">Continuidad Operativa</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide" id="m-slide-8" style="background: var(--primary); color: white;">
         <h2 style="color: var(--accent);">Siguiente Paso</h2>
         <h1 style="color: white;">Diagnóstico Inicial</h1>
-        <p style="color: #DDD;">Evalúe su estructura corporativa actual sin compromiso.</p>
+        <p style="color: #DDD; font-size: 18px;">Agende una evaluación estratégica y confidencial de su estructura actual.</p>
         
-        <div style="background: white; border-radius: 8px; padding: 20px; margin-top: 30px; text-align: center; position: relative; z-index: 30;">
-            <h3 style="color: var(--primary); margin: 0 0 10px 0;">Contáctenos</h3>
+        <div style="background: white; border-radius: 8px; padding: 25px 20px; margin-top: 30px; text-align: center; position: relative; z-index: 30;">
+            <h3 style="color: var(--primary); margin: 0 0 15px 0; font-size: 20px;">Hablemos de negocios</h3>
             <p style="color: #444; font-size: 16px; margin: 0; font-weight: 600;">✉️ contacto@consultinggroup.com</p>
-            <p style="color: #444; font-size: 16px; margin: 5px 0 0 0;">📞 [Código] 0000 0000</p>
+            <p style="color: #444; font-size: 16px; margin: 10px 0 0 0;">📞 [Código] 0000 0000</p>
         </div>
     </div>
 
     <div class="progress" id="dots">
         <div class="dot active"></div><div class="dot"></div><div class="dot"></div>
         <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="dot"></div><div class="dot"></div>
     </div>
 </div>
 
 <script>
     let curr = 1;
-    const tot = 6;
+    const tot = 8;
     const dotsContainer = document.getElementById('dots');
 
     function move(step) {
@@ -202,6 +222,5 @@ html_mobile = """
 </html>
 """
 
-# 4. Renderizar el HTML dentro de Streamlit
-# Ajustamos la altura para asegurarnos de que el contenedor de 710px quepa sin barras de desplazamiento
+# 4. Renderizar el HTML en la aplicación web
 components.html(html_mobile, height=750, scrolling=False)
